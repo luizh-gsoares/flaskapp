@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<header>
+  <title>Minha primeira página HTML</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+</header>
+
+<html>
+  <body>
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">luizhgsoares</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item align-self-center">
+              <a class="nav-link active" href="#">Tela Inicial </a>
+            </li>
+            {% if session['usuario'] %}
+            <li class="nav-item">
+              <p class="nav-link">Bem vindo, {{ session['usuario'] }}</p>
+            <li class="nav-item">
+              <a class="nav-link" href="/upload">Upload</a>
+            </li>
+            {% elif not session['usuario'] %}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/usuario">Cadastro</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar-->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Minha primeira página HTML</h1>
+          <p>Olá, mundo!</p>
+          <img src="../static/images/gandalf.gif" />
+        </div>
+      </div>
+
+    <script src="../static/css/bootstrap.min.css"></script>
+  </body>
+</html>
