@@ -1,6 +1,5 @@
 from flask import Flask, render_template, session, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase
 import os
 
 app = Flask(__name__)
@@ -10,14 +9,9 @@ app.secret_key = 'PaoDoceFrango2024'
 UPLOAD_FOLDER = '/home/luizhgsoares/mysite/upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Configuração do banco de dados
-class Base(DeclarativeBase):
-  pass
-db = SQLAlchemy(model_class= Base)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///minhabase.sqlite3'
 
-db.init_app(app)
+db = SQLAlchemy(app)
 
 app.app_context().push()
 
