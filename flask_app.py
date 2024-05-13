@@ -39,7 +39,7 @@ with app.app_context():
 def index():
     if 'username' in session:
         return render_template('index.html', usuario_logado = session['username'], usuarios = Usuario.query.all())
-    
+
     return render_template('index.html')
 
 # Rota para a página de registro
@@ -54,7 +54,7 @@ def addUsuario():
         nome = request.form['nome']
         senha = request.form['senha']
         if Usuario.query.filter_by(nome=nome).first():
-            return render_template('index.html', mensagem = 'Usuário já existe, tente novamente.')
+            return render_template('register.html', mensagem = 'Usuário já existe, tente novamente.')
         else:
             user = Usuario(nome, senha)
             db.session.add(user)
@@ -88,8 +88,8 @@ def upload():
             file = request.files['arquivo']
             savePath = os.path.join(UPLOAD_FOLDER, file.filename)
             file.save(savePath)
-            return render_template('upload.html', mensagem = 'Arquivo enviado com sucesso.')
-        return render_template('upload.html')
+            return render_template('upload.html', mensagem = 'Arquivo enviado com sucesso.', usuario_logado = session['username'])
+        return render_template('upload.html', usuario_logado = session['username'])
     return render_template('index.html', mensagem = 'Faça o login para acessar esta página.')
 
 # Função principal

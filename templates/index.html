@@ -7,82 +7,91 @@
 </header>
 
 <html>
+  <body>
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">luizhgsoares</a>
 
-<body>
-  <!-- Navbar-->
-  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">luizhgsoares</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <div class="navbar-collapse collapse" id="navbarColor01">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Tela Inicial </a>
+            </li>
 
-      <div class="navbar-collapse collapse" id="navbarColor01">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            {% if usuario_logado %}
 
-          <li class="nav-item">
-            <a class="nav-link active" href="/">Tela Inicial </a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/upload">Upload</a>
+            </li>
 
-          {% if usuario_logado %}
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="/upload">Upload</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-
-          {% elif not usuario_logado %}
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Cadastro</a>
-          </li>
-          {% endif %}
-
-        </ul>
+            {% elif not usuario_logado %}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Cadastro</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  <!-- Navbar-->
+    </nav>
+    <!-- Navbar-->
 
-  <div class="py-5">
-    <div class="container px-5">
-      <div class="row d-flex-center text-center">
-        {% if not usuario_logado %}
-        <img src="../static/images/gandalf.gif" />
+    <div class="py-5">
+      <div class="container px-5">
+        <div class="row d-flex-center text-center">
+          {% if mensagem %}
+          <div class="py-5">
+            <div class="alert alert-dismissible alert-danger">
+              {{ mensagem }}
+            </div>
+          </div>
+          {% endif %} {% if not usuario_logado %}
+          <img src="../static/images/gandalf.gif" />
+          {% endif %}
+        </div>
+
+        {% if usuario_logado %}
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Senha</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in usuarios %}
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>{{ user.nome }}</td>
+              <td>{{ user.senha }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
         {% endif %}
       </div>
-
-      {% if usuario_logado %}
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Senha</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in usuarios %}
-          <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.nome }}</td>
-            <td>{{ user.senha }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
     </div>
-  </div>
 
-  <script src="../static/css/bootstrap.min.css"></script>
-</body>
-
+    <script src="../static/css/bootstrap.min.css"></script>
+  </body>
 </html>
